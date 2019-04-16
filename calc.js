@@ -15,7 +15,7 @@ const MathParser = (function() {
       if (/\d/.test(ch) || ch === '.') {
         numericBuffer.push(ch);
       } else if (ch in operations || ch === '(' || ch === ')') {
-        if (ch === '-' && !numericBuffer.length) {
+        if (ch === '-' && !numericBuffer.length && tokens[tokens.length - 1] !== ')') {
           numericBuffer.push(ch);
         } else {
           if (numericBuffer.length) {
@@ -93,6 +93,8 @@ const MathParser = (function() {
     }
     result = result.trim();
 
+    console.log('result', result);
+
     return result.length ? result : null;
   }
 
@@ -125,6 +127,7 @@ const MathParser = (function() {
           this.parse(infixExpression);
         }
 
+        console.log('postfixExpression.split(_D_)', postfixExpression.split(_D_));
         postfixExpression.split(_D_).forEach(token => {
           if (token in operations) {
             const [x, y] = [stack.pop(), stack.pop()];
