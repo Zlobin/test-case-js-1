@@ -93,8 +93,6 @@ const MathParser = (function() {
     }
     result = result.trim();
 
-    console.log('result', result);
-
     return result.length ? result : null;
   }
 
@@ -127,7 +125,6 @@ const MathParser = (function() {
           this.parse(infixExpression);
         }
 
-        console.log('postfixExpression.split(_D_)', postfixExpression.split(_D_));
         postfixExpression.split(_D_).forEach(token => {
           if (token in operations) {
             const [x, y] = [stack.pop(), stack.pop()];
